@@ -5,6 +5,9 @@ def excel_to_json(excel_file, json_file):
     # Read Excel file into a DataFrame
     df = pd.read_excel(excel_file)
 
+    # Replace NaN values with None, so that they are handled as null in JSON
+    df = df.where(pd.notnull(df), None)
+
     # Convert DataFrame to JSON format as an array of objects
     json_data = df.to_dict(orient='records')
 
